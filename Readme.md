@@ -150,9 +150,9 @@ class MyEntityRestController extends AbstractRestController implements RestCRUDI
             'offers'           => new DoctrineGroupConcatFieldDescriptor(
                 new DoctrineFieldDescriptor(
                     'id',
-                    'offer',
+                    'offers',
                     'AcmeBackendApiBundle:Offer',
-                    'offer',
+                    'offers',
                     $offerJoinForOneToMany
                 ),
                 'offers'
