@@ -61,13 +61,13 @@ In :
 ------------
 
 ```php
-   <?php
+<?php
 
 namespace Acme\BackendApiBundle\Controller\RestController;
 
 use RRoek\RestComponentBundle\Rest\Model\AbstractRestController;
+use RRoek\RestComponentBundle\Rest\Model\RestCRUDInterface;
 use RRoek\RestComponentBundle\Rest\Exception\EntityNotFoundException;
-use RRoek\RestComponentBundle\Model\Controller\RestController\RestCRUDInterface;
 use RRoek\RestComponentBundle\Rest\ListBuilder\Doctrine\DoctrineListBuilder;
 use RRoek\RestComponentBundle\Rest\ListBuilder\Doctrine\FieldDescriptor\DoctrineFieldDescriptor;
 use RRoek\RestComponentBundle\Rest\ListBuilder\Doctrine\FieldDescriptor\DoctrineGroupConcatFieldDescriptor;
