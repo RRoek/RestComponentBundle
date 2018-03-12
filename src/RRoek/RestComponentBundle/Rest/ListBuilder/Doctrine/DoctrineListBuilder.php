@@ -31,7 +31,6 @@ use RRoek\RestComponentBundle\Rest\ListBuilder\Expression\Doctrine\DoctrineWhere
 use RRoek\RestComponentBundle\Rest\ListBuilder\Expression\Exception\InvalidExpressionArgumentException;
 use RRoek\RestComponentBundle\Rest\ListBuilder\Expression\ExpressionInterface;
 use RRoek\RestComponentBundle\Rest\ListBuilder\FieldDescriptorInterface;
-use RRoek\RestComponentBundle\Security\Authorization\AccessControl\SecuredEntityRepositoryTrait;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -39,7 +38,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class DoctrineListBuilder extends AbstractListBuilder
 {
-    use SecuredEntityRepositoryTrait, EncodeAliasTrait;
+    use EncodeAliasTrait;
 
     /**
      * @var EventDispatcherInterface
@@ -348,7 +347,8 @@ class DoctrineListBuilder extends AbstractListBuilder
         // create querybuilder and add select
         $queryBuilder = $this->createQueryBuilder($addJoins)->select($select);
 
-        if ($this->user && $this->permission && array_key_exists($this->permission, $this->permissions)) {
+        //Desactivate use of Sulu security :
+        /*if ($this->user && $this->permission && array_key_exists($this->permission, $this->permissions)) {
             $this->addAccessControl(
                 $queryBuilder,
                 $this->user,
@@ -356,7 +356,7 @@ class DoctrineListBuilder extends AbstractListBuilder
                 $this->entityName,
                 $this->encodeAlias($this->entityName)
             );
-        }
+        }*/
 
         return $queryBuilder;
     }
