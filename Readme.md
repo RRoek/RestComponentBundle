@@ -82,8 +82,9 @@ use Acme\BackendApiBundle\Entity\MyEntity;
  */
 class MyEntityRestController extends AbstractRestController implements RestCRUDInterface
 {
-	// ---- --- Protected Methods --- ----
+    // ---- --- Protected Methods --- ----
     /**
+     * This method will declare the fieds of our Entity to print 
      * Returns array of existing field-descriptors.
      *
      * @return array
@@ -104,20 +105,37 @@ class MyEntityRestController extends AbstractRestController implements RestCRUDI
             ),
         ];
 
+        //We return our entity fields & joins to print on API routes :
         return [
             'id'                         => new DoctrineFieldDescriptor(
-                'id',
-                'id',
-                'AcmeBackendApiBundle:MyEntity',
-                'id',
-                []
+                'id',//$fieldName
+                'id',//$name
+                'AcmeBackendApiBundle:MyEntity',//$entityName
+                'id',//$translation = null,
+                [],//$joins = [],
+                false,//$disabled = false,
+                false,//$default = false,
+                '',//$type = '',
+                '',//$width = '',
+                '',//$minWidth = '',
+                true,//$sortable = true,
+                false,//$editable = false,
+                ''//$cssClass = ''
             ),
             'label'                      => new DoctrineFieldDescriptor(
                 'label',
                 'label',
                 'AcmeBackendApiBundle:MyEntity',
                 'label',
-                []
+                [],
+                false,
+                false,
+                '',
+                '',
+                '',
+                true,
+                false,
+                ''
             ),
             //[...]
             //if MyEntity have a join on another entity (case with ManyToOne or OneToOne) :
@@ -201,8 +219,8 @@ class MyEntityRestController extends AbstractRestController implements RestCRUDI
             //Make our list representation to get paginated collection + filter, search etc. :
             $list = $this->_getListRepresentation(
                 $items,
-                'my_entity_items',
-                'private_get_my_entity_list',
+                'my_entity_items',//Name of items key
+                'private_get_my_entity_list',//route to use (for pagination, search & filters
                 $request,
                 $listBuilder
             );
