@@ -14,6 +14,8 @@
 This bundle is initially forked from [Sulu CMS (a CMF based on Symfony CMF)](https://github.com/sulu/sulu "Sulu CMS (a CMF based on Symfony CMF)").
 It give you ability to to easier & faster make great RESTful HATEOAS Apis.
 
+It require [friendsofsymfony/rest-bundle](https://github.com/FriendsOfSymfony/FOSRestBundle "friendsofsymfony/rest-bundle") &  [willdurand/hateoas-bundle](https://github.com/willdurand/Hateoas "willdurand/hateoas-bundle"). And is placed on top of this bundles.
+
 ### Advantages
 Easier. Faster. Make great RESTful HATEOAS APIs !
 
