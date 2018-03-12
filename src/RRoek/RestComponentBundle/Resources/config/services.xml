@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="rroek_rest_component.rest_helper.class">RRoek\RestComponentBundle\Rest\RestHelper</parameter>
+        <parameter key="rroek_rest_component.doctrine_rest_helper.class">RRoek\RestComponentBundle\Rest\DoctrineRestHelper</parameter>
+        <parameter key="rroek_rest_component.list_rest_helper.class">RRoek\RestComponentBundle\Rest\ListBuilder\ListRestHelper</parameter>
+        <parameter key="rroek_rest_component.doctrine_list_builder_factory.class">RRoek\RestComponentBundle\Rest\ListBuilder\Doctrine\DoctrineListBuilderFactory</parameter>
+        <parameter key="rroek_rest_component.rest.datetime_handler.class">RRoek\RestComponentBundle\Rest\Handler\DateHandler</parameter>
+
+
+        <parameter key="rroek_rest_component.security.permissions" type="collection">
+            <parameter key="view">64</parameter>
+            <parameter key="add">32</parameter>
+            <parameter key="edit">16</parameter>
+            <parameter key="delete">8</parameter>
+            <parameter key="archive">4</parameter>
+            <parameter key="live">2</parameter>
+            <parameter key="security">1</parameter>
+        </parameter>
+    </parameters>
+
+    <services>
+        <service id="rroek_rest_component.rest_helper" class="%rroek_rest_component.rest_helper.class%" public="true">
+            <argument type="service" id="rroek_rest_component.list_rest_helper"/>
+        </service>
+
+        <service id="rroek_rest_component.doctrine_rest_helper" class="%rroek_rest_component.doctrine_rest_helper.class%" public="true">
+            <argument type="service" id="rroek_rest_component.list_rest_helper"/>
+        </service>
+
+        <service id="rroek_rest_component.list_rest_helper" class="%rroek_rest_component.list_rest_helper.class%" public="true">
+            <argument type="service" id="request_stack"/>
+        </service>
+
+        <service id="rroek_rest_component.rest.exception_wrapper_handler" class="RRoek\RestComponentBundle\Rest\ExceptionWrapperHandler" public="true">
+            <argument>%kernel.environment%</argument>
+        </service>
+
+        <service id="rroek_rest_component.doctrine_list_builder_factory" class="%rroek_rest_component.doctrine_list_builder_factory.class%" public="true">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument>%rroek_rest_component.security.permissions%</argument>
+        </service>
+
+        <service id="rroek_rest_component.rest.datetime_handler" class="%rroek_rest_component.rest.datetime_handler.class%" public="true">
+            <tag name="jms_serializer.subscribing_handler" />
+        </service>
+    </services>
+</container>

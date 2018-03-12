@@ -1,3 +1,0 @@
-sulu_tag.tags:
-    type: rest
-    resource: Sulu\Bundle\TagBundle\Controller\TagController

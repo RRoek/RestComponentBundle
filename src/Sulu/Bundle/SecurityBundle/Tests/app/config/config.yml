@@ -1,7 +1,0 @@
-framework:
-    profiler:
-        enabled: true
-
-swiftmailer:
-    disable_delivery: true
-    transport: "null"
