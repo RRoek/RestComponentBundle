@@ -1,6 +1,6 @@
 {
-    "name": "laposte/rest-component-bundle",
-    "description": "Boîte noire permettant la génération rapide et dynamique d'APIs RESTFul HATEOAS",
+    "name": "rroek/rest-component-bundle",
+    "description": "BlackBox to easy generate RESTful HATEOAS API",
     "type": "symfony-bundle",
     "license": "proprietary",
     "authors": [
