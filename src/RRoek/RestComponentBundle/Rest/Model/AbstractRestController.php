@@ -30,11 +30,11 @@ abstract class AbstractRestController extends FOSRestController
      * @return mixed
      */
     abstract protected function _getFieldDescriptors();
-    
+
     /**
      * @return string EntityName
      */
-    abstract public function getEntityName(): string;
+    abstract public function getEntityName();
 
     /**
      * @param int|null $id
