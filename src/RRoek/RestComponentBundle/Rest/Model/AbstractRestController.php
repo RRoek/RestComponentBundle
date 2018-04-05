@@ -145,6 +145,6 @@ abstract class AbstractRestController extends FOSRestController
      */
     protected function _createForbiddenView($authorizationStatus)
     {
-        return $this->view([self::MESSAGE => $authorizationStatus[self::MESSAGE]], Response::HTTP_FORBIDDEN);
+        return $this->view(['message' => $authorizationStatus['message']], Response::HTTP_FORBIDDEN);
     }
 }
