@@ -9,6 +9,7 @@
         <parameter key="rroek_rest_component.list_rest_helper.class">RRoek\RestComponentBundle\Rest\ListBuilder\ListRestHelper</parameter>
         <parameter key="rroek_rest_component.doctrine_list_builder_factory.class">RRoek\RestComponentBundle\Rest\ListBuilder\Doctrine\DoctrineListBuilderFactory</parameter>
         <parameter key="rroek_rest_component.rest.datetime_handler.class">RRoek\RestComponentBundle\Rest\Handler\DateHandler</parameter>
+        <parameter key="rroek_rest_component.rest.api.field_descriptor.generator.class">RRoek\RestComponentBundle\Rest\Generator\ApiFieldDescriptorGenerator</parameter>
 
 
         <parameter key="rroek_rest_component.security.permissions" type="collection">
@@ -47,6 +48,9 @@
 
         <service id="rroek_rest_component.rest.datetime_handler" class="%rroek_rest_component.rest.datetime_handler.class%" public="true">
             <tag name="jms_serializer.subscribing_handler" />
+        </service>
+
+        <service id="rroek_rest_component.rest.api.field_descriptor.generator" class="%rroek_rest_component.rest.api.field_descriptor.generator.class%" public="true">
         </service>
     </services>
 </container>
