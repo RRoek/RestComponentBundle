@@ -17,22 +17,30 @@ class ApiFieldDescriptorGenerator extends AbstractApiFieldDescriptorGenerator
      */
     public function getAllFieldDescriptors($entityFields)
     {
-        $simpleFields          = $this->getSimpleFieldDescriptors(
-            $entityFields['entityFields'],
-            $entityFields['entityName']
-        );
-        $manyToOneJoinedFields = $this->getJoinedFieldDescriptors(
-            $entityFields['joinManyToOneEntityFields'],
-            $entityFields['entityName']
-        );
-        $oneToOneJoinedFields  = $this->getJoinedFieldDescriptors(
-            $entityFields['joinOneToOneEntityFields'],
-            $entityFields['entityName']
-        );
-        $oneToManyJoinedFields = $this->getOneToManyJoinedFieldDescriptors(
-            $entityFields['joinOneToManyEntityFields'],
-            $entityFields['entityName']
-        );
+        if (isset($entityFields['entityFields']) && !empty($entityFields['entityFields'])) {
+            $simpleFields = $this->getSimpleFieldDescriptors(
+                $entityFields['entityFields'],
+                $entityFields['entityName']
+            );
+        }
+        if (isset($entityFields['joinManyToOneEntityFields']) && !empty($entityFields['joinManyToOneEntityFields'])) {
+            $manyToOneJoinedFields = $this->getJoinedFieldDescriptors(
+                $entityFields['joinManyToOneEntityFields'],
+                $entityFields['entityName']
+            );
+        }
+        if (isset($entityFields['joinOneToOneEntityFields']) && !empty($entityFields['joinOneToOneEntityFields'])) {
+            $oneToOneJoinedFields = $this->getJoinedFieldDescriptors(
+                $entityFields['joinOneToOneEntityFields'],
+                $entityFields['entityName']
+            );
+        }
+        if (isset($entityFields['joinOneToManyEntityFields']) && !empty($entityFields['joinOneToManyEntityFields'])) {
+            $oneToManyJoinedFields = $this->getOneToManyJoinedFieldDescriptors(
+                $entityFields['joinOneToManyEntityFields'],
+                $entityFields['entityName']
+            );
+        }
 
         return array_merge($simpleFields, $manyToOneJoinedFields, $oneToOneJoinedFields, $oneToManyJoinedFields);
     }
