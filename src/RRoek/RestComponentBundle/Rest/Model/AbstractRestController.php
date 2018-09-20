@@ -101,7 +101,7 @@ abstract class AbstractRestController extends FOSRestController
      *
      * @return array
      */
-    protected function getDataItemsWithConditions(int $id = null, string $specificFunctionToCall = 'specificQuery', array $args = null)
+    protected function getDataItemsWithConditions(int $id = null, string $specificFunctionToCall = 'specificQuery', array $args = null, $multiple = true)
     {
         $listBuilder = $this->initDataItems($id);
         if (!empty($args)) {
@@ -110,7 +110,11 @@ abstract class AbstractRestController extends FOSRestController
             $this->$specificFunctionToCall($listBuilder);
         }
 
-        return [$listBuilder, $listBuilder->execute()];
+        if (null !== $id || $multiple === false) {
+            return $listBuilder->execute();
+        } else {
+            return [$listBuilder, $listBuilder->execute()];
+        }
     }
 
     /**

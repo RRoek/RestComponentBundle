@@ -28,7 +28,7 @@ class AbstractApiFieldDescriptorGenerator
             if (is_array($field)) {
                 $results[$field['field']] = new DoctrineFieldDescriptor(
                     $field['field'],
-                    $field['delimitor'] . $field['field'],
+                    (isset($field['serializedName']) ? $field['serializedName'] : $field['delimitor'] . $field['field']),
                     $entityName,
                     $field['field'],
                     []
