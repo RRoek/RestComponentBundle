@@ -29,7 +29,7 @@ abstract class AbstractRestController extends FOSRestController
     /**
      * @return mixed
      */
-    abstract protected function _getFieldDescriptors();
+    abstract protected function getFieldDescriptors();
 
     /**
      * @return string EntityName
@@ -41,19 +41,19 @@ abstract class AbstractRestController extends FOSRestController
      *
      * @return DoctrineListBuilder
      */
-    protected function _initDataItems(int $id = null)
+    protected function initDataItems(int $id = null)
     {
         $restHelper  = $this->get('rroek_rest_component.doctrine_rest_helper');
         $factory     = $this->get('rroek_rest_component.doctrine_list_builder_factory');
         $listBuilder = $factory->create($this->getEntityName());
-        $restHelper->initializeListBuilder($listBuilder, $this->_getFieldDescriptors());
+        $restHelper->initializeListBuilder($listBuilder, $this->getFieldDescriptors());
         if (null !== $id) {
             $listBuilder->where(
-                $this->_getFieldDescriptors()['id'],
+                $this->getFieldDescriptors()['id'],
                 $id,
                 DoctrineListBuilder::WHERE_COMPARATOR_EQUAL
             );
-            $listBuilder->addGroupBy($this->_getFieldDescriptors()['id']);
+            $listBuilder->addGroupBy($this->getFieldDescriptors()['id']);
         }
 
         return $listBuilder;
@@ -64,9 +64,9 @@ abstract class AbstractRestController extends FOSRestController
      *
      * @return array|mixed
      */
-    protected function _getDataItems(int $id = null)
+    protected function getDataItems(int $id = null)
     {
-        $listBuilder = $this->_initDataItems($id);
+        $listBuilder = $this->initDataItems($id);
 
         if (null !== $id) {
             return $listBuilder->execute();
@@ -81,9 +81,9 @@ abstract class AbstractRestController extends FOSRestController
      *
      * @return array
      */
-    protected function _getDataItemsWithConditions(int $id = null, string $specificFunctionToCall = '_specificQuery')
+    protected function getDataItemsWithConditions(int $id = null, string $specificFunctionToCall = '_specificQuery')
     {
-        $listBuilder = $this->_initDataItems($id);
+        $listBuilder = $this->initDataItems($id);
         $this->$specificFunctionToCall($listBuilder);
 
         return [$listBuilder, $listBuilder->execute()];
@@ -98,7 +98,7 @@ abstract class AbstractRestController extends FOSRestController
      *
      * @return ListRepresentation
      */
-    protected function _getListRepresentation(
+    protected function getListRepresentation(
         array $items,
         string $itemsLabel,
         string $route,
@@ -124,7 +124,7 @@ abstract class AbstractRestController extends FOSRestController
      *
      * @return GroupedListRepresentation
      */
-    protected function _getGroupedListRepresentation(array $items, string $route, Request $request, $listBuilder)
+    protected function getGroupedListRepresentation(array $items, string $route, Request $request, $listBuilder)
     {
         return new GroupedListRepresentation(
             $items,
@@ -143,7 +143,7 @@ abstract class AbstractRestController extends FOSRestController
      *
      * @return bool|View
      */
-    protected function _createForbiddenView($authorizationStatus)
+    protected function createForbiddenView($authorizationStatus)
     {
         return $this->view(['message' => $authorizationStatus['message']], Response::HTTP_FORBIDDEN);
     }
