@@ -89,7 +89,7 @@ abstract class AbstractRestController extends FOSRestController
         $listBuilder = $this->initDataItems($id);
 
         if (null !== $id) {
-            return $listBuilder->execute();
+            return $listBuilder->execute()[0];
         } else {
             return [$listBuilder, $listBuilder->execute()];
         }
@@ -111,7 +111,7 @@ abstract class AbstractRestController extends FOSRestController
         }
 
         if (null !== $id || $multiple === false) {
-            return $listBuilder->execute();
+            return $listBuilder->execute()[0];
         } else {
             return [$listBuilder, $listBuilder->execute()];
         }
