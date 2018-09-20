@@ -11,6 +11,7 @@
 
 namespace RRoek\RestComponentBundle\Rest\Model;
 
+use RRoek\RestComponentBundle\Rest\Generator\ApiFieldDescriptorGenerator;
 use RRoek\RestComponentBundle\Rest\ListBuilder\Doctrine\DoctrineListBuilder;
 use RRoek\RestComponentBundle\Rest\ListBuilder\GroupedListRepresentation;
 use RRoek\RestComponentBundle\Rest\ListBuilder\ListBuilderInterface;
@@ -27,14 +28,33 @@ abstract class AbstractRestController extends FOSRestController
 {
     //---- --- Private & Protected Methods : --- ----
     /**
-     * @return mixed
-     */
-    abstract protected function getFieldDescriptors();
-
-    /**
      * @return string EntityName
      */
     abstract public function getEntityName();
+
+    /**
+     * @return EntityDescriptorInterface
+     */
+    abstract protected function getEntityDescriptorClass();
+
+    /**
+     * @return ApiFieldDescriptorGenerator|object
+     */
+    protected function getApiFieldDescriptorGenerator()
+    {
+        return $this->get('rroek_rest_component.rest.api.field_descriptor.generator');
+    }
+
+    /**
+     * Returns array of existing field-descriptors.
+     *
+     * @return array
+     */
+    protected function getFieldDescriptors()
+    {
+        return $this->getApiFieldDescriptorGenerator()
+                    ->getAllFieldDescriptors($this->getEntityDescriptorClass()::getFieldsDescription());
+    }
 
     /**
      * @param int|null $id
